@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+export const firebaseConfig = {  // Named export অ্যাড করলাম
   apiKey: import.meta.env.VITE_apiKey,
   authDomain: import.meta.env.VITE_authDomain,
   projectId: import.meta.env.VITE_projectId,
@@ -16,6 +16,6 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 export const auth = getAuth(app);
