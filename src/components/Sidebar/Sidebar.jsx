@@ -12,7 +12,7 @@ const Sidebar = () => {
                     to={'/'}
                     className={({ isActive }) => `is-drawer-close:tooltip is-drawer-close:tooltip-right text-primary ${isActive ? 'text-secondary' : ''}`}
                     data-tip="Home">
-                    {/* icon */}
+                    
                     <IoHome className='text-primary font-bold' />
                     <span className="is-drawer-close:hidden">Home</span>
                 </NavLink>
@@ -22,7 +22,7 @@ const Sidebar = () => {
                     to={'/dashboard/add-lesson'}
                     className={({ isActive }) => `is-drawer-close:tooltip is-drawer-close:tooltip-right text-primary ${isActive ? 'text-secondary' : ''}`}
                     data-tip="Add Lesson">
-                    {/* icon */}
+                    
                     <LuNotebookPen className=' font-bold' />
                     <span className="is-drawer-close:hidden">Add Lesson</span>
                 </NavLink>
@@ -32,7 +32,7 @@ const Sidebar = () => {
                     to={'/dashboard/my-lessons'}
                     className={({ isActive }) => `is-drawer-close:tooltip is-drawer-close:tooltip-right text-primary ${isActive ? 'text-secondary' : ''}`}
                     data-tip="My Lesson">
-                    {/* icon */}
+                    
                     <FaListAlt className='' />
                     <span className="is-drawer-close:hidden">My Lesson</span>
                 </NavLink>
@@ -42,7 +42,7 @@ const Sidebar = () => {
                     to={'/dashboard/my-favorites'}
                     className={({ isActive }) => `is-drawer-close:tooltip is-drawer-close:tooltip-right text-primary ${isActive ? 'text-secondary' : ''}`}
                     data-tip="My Favorites">
-                    {/* icon */}
+                    
                     <FaHeart className='' />
                     <span className="is-drawer-close:hidden">My Favorites</span>
                 </NavLink>
@@ -52,7 +52,7 @@ const Sidebar = () => {
                     to={'/dashboard/manage-users'}
                     className={({ isActive }) => `is-drawer-close:tooltip is-drawer-close:tooltip-right text-primary ${isActive ? 'text-secondary' : ''}`}
                     data-tip="Manage Users">
-                    {/* icon */}
+                   
                     <FaUsers className='' />
                     <span className="is-drawer-close:hidden">Manage Users</span>
                 </NavLink>
@@ -62,7 +62,7 @@ const Sidebar = () => {
                     to={'/dashboard/manage-lessons'}
                     className={({ isActive }) => `is-drawer-close:tooltip is-drawer-close:tooltip-right text-primary ${isActive ? 'text-secondary' : ''}`}
                     data-tip="Manage Lessons">
-                    {/* icon */}
+                    
                     <FaUserCog className='' />
                     <span className="is-drawer-close:hidden">Manage Lessons</span>
                 </NavLink>
@@ -72,7 +72,7 @@ const Sidebar = () => {
                     to={'/dashboard/reported-lessons'}
                     className={({ isActive }) => `is-drawer-close:tooltip is-drawer-close:tooltip-right text-primary ${isActive ? 'text-secondary' : ''}`}
                     data-tip="Reported Lessons">
-                    {/* icon */}
+                    
                     <MdReportProblem className='' />
                     <span className="is-drawer-close:hidden">Reported Lessons</span>
                 </NavLink>

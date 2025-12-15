@@ -12,7 +12,7 @@ const Register = () => {
   const location = useLocation()
   const from = location.state || '/'
 
-  // react hook form
+  // react hook
   const {
     register,
     handleSubmit,
@@ -23,21 +23,21 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     const { name, image, email, password } = data;
-    // image file
+    
     const imageFile = image[0];
 
     try {
-      // 1.upload img
+      
       const imageURL = await imageUpload(imageFile);
 
-      //2. User Registration
+      
       const result = await createUser(email, password)
 
-      // save or update user via signup
+      
       await saveOrUpdateUser({ name, email, image: imageURL })
 
 
-      //3. Save username & profile photo
+      //3. Save username & profile
       await updateUserProfile(
         name,
         imageURL
@@ -55,11 +55,11 @@ const Register = () => {
   // Handle Google Signin
   const handleGoogleSignIn = async () => {
     try {
-      //User Registration using google
+      
       const result = await signInWithGoogle()
       console.log(result)
 
-      // save or update user via signup
+      
       await saveOrUpdateUser({
         name: result?.user?.displayName,
         email: result?.user?.email,
