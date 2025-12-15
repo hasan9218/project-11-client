@@ -6,13 +6,13 @@ import { TbFidgetSpinner } from 'react-icons/tb'
 import { imageUpload, saveOrUpdateUser } from '../../utils'
 import { useForm } from 'react-hook-form'
 
-const Register = () => {
+const SignUp = () => {
   const { createUser, updateUserProfile, signInWithGoogle, loading } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   const from = location.state || '/'
 
-  // react hook
+  // react hook form
   const {
     register,
     handleSubmit,
@@ -23,21 +23,21 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     const { name, image, email, password } = data;
-    
+    // image file
     const imageFile = image[0];
 
     try {
-      
+      // 1.upload img
       const imageURL = await imageUpload(imageFile);
 
-      
+      //2. User Registration
       const result = await createUser(email, password)
 
-      
+      // save or update user via signup
       await saveOrUpdateUser({ name, email, image: imageURL })
 
 
-      //3. Save username & profile
+      //3. Save username & profile photo
       await updateUserProfile(
         name,
         imageURL
@@ -55,11 +55,11 @@ const Register = () => {
   // Handle Google Signin
   const handleGoogleSignIn = async () => {
     try {
-      
+      //User Registration using google
       const result = await signInWithGoogle()
       console.log(result)
 
-      
+      // save or update user via signup
       await saveOrUpdateUser({
         name: result?.user?.displayName,
         email: result?.user?.email,
@@ -77,8 +77,8 @@ const Register = () => {
     <div className='flex justify-center items-center min-h-screen bg-white'>
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
         <div className='mb-8 text-center'>
-          <h1 className='my-3 text-4xl font-bold'>Registration</h1>
-          <p className='text-sm text-gray-400'>Welcome to WisdomCell</p>
+          <h1 className='my-3 text-4xl font-bold'>Sign Up</h1>
+          <p className='text-sm text-gray-400'>Welcome to WisdomVault</p>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -130,6 +130,9 @@ const Register = () => {
       focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary
       py-2'
               />
+              <p className='mt-1 text-xs text-gray-400'>
+                PNG, JPG or JPEG (max 2MB)
+              </p>
             </div>
             {/* Email */}
             <div>
@@ -182,12 +185,12 @@ const Register = () => {
           <div>
             <button
               type='submit'
-              className='bg-secondary cursor-pointer w-full rounded-md py-3 text-white'
+              className='bg-secondary w-full rounded-md py-3 text-white'
             >
               {loading ? (
                 <TbFidgetSpinner className='animate-spin m-auto' />
               ) : (
-                'Register'
+                'Continue'
               )}
             </button>
           </div>
@@ -221,4 +224,4 @@ const Register = () => {
     </div>
   )
 }
-export default Register
+export default SignUp

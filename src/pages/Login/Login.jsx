@@ -28,7 +28,7 @@ const Login = () => {
       const result=await signIn(email, password)
       console.log(result)
 
-      
+      //save or update users via signup
       await saveOrUpdateUser({
         name: result?.user?.displayName,
         email: result?.user?.email,
@@ -43,14 +43,14 @@ const Login = () => {
     }
   }
 
-  // Handle Google
+  // Handle Google Signin
   const handleGoogleSignIn = async () => {
     try {
-      
+      //User Registration using google
       const result = await signInWithGoogle()
       console.log(result)
       
-      // save or update user
+      // save or update user via signup
       await saveOrUpdateUser({
         name: result?.user?.displayName,
         email: result?.user?.email,
@@ -117,12 +117,12 @@ const Login = () => {
           <div>
             <button
               type='submit'
-              className='bg-secondary cursor-pointer w-full rounded-md py-3 text-white'
+              className='bg-secondary w-full rounded-md py-3 text-white'
             >
               {loading ? (
                 <TbFidgetSpinner className='animate-spin m-auto' />
               ) : (
-                'Login'
+                'Continue'
               )}
             </button>
           </div>
@@ -151,10 +151,10 @@ const Login = () => {
           Don&apos;t have an account yet?{' '}
           <Link
             state={from}
-            to='/register'
+            to='/signup'
             className='hover:underline hover:text-secondary text-gray-600'
           >
-            Registration
+            Sign up
           </Link>
           .
         </p>
