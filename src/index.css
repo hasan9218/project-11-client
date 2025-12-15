@@ -5,8 +5,12 @@
   themes: light --default;
 }
 
-
-
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #F69074;
+  --color-secondary: #02a2a2;
+}
 
 body {
   font-family: "Nunito", sans-serif;
