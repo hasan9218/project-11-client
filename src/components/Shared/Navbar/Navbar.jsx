@@ -4,28 +4,28 @@ import { useState } from 'react'
 import { Link, NavLink } from 'react-router'
 import useAuth from '../../../hooks/useAuth'
 import avatarImg from '../../../assets/avater.png'
-import logo from '../../../assets/logo.png'
+import logo from '../../../assets/WisdomVault.png'
 const Navbar = () => {
     const { user, logOut } = useAuth()
     const [isOpen, setIsOpen] = useState(false)
 
     // routes
     const links = <>
-        <li><NavLink to={'/'} className={({ isActive }) => 
-      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
-    }>Home</NavLink></li>
-        <li><NavLink to={'/dashboard/add-lesson'} className={({ isActive }) => 
-      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
-    }>Add Lesson</NavLink></li>
-        <li><NavLink to={'/dashboard/my-lessons'} className={({ isActive }) => 
-      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
-    }>My Lessons</NavLink></li>
-        <li><NavLink to={'/public-lessons'} className={({ isActive }) => 
-      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
-    }>Public Lesson</NavLink></li>
-        <li><NavLink to={'/'} className={({ isActive }) => 
-      `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline' : ''}`
-    }>Upgrade to Premium</NavLink></li>
+        <li><NavLink to={'/'} className={({ isActive }) =>
+            `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
+        }>Home</NavLink></li>
+        <li><NavLink to={'/dashboard/add-lesson'} className={({ isActive }) =>
+            `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
+        }>Add Lesson</NavLink></li>
+        <li><NavLink to={'/dashboard/my-lessons'} className={({ isActive }) =>
+            `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
+        }>My Lessons</NavLink></li>
+        <li><NavLink to={'/public-lessons'} className={({ isActive }) =>
+            `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
+        }>Public Lesson</NavLink></li>
+        <li><NavLink to={'/payment'} className={({ isActive }) =>
+            `text-[#02a2a2] font-bold text-lg ${isActive ? 'underline text-primary' : ''}`
+        }>Upgrade to Premium</NavLink></li>
     </>
     return (
         <Container>
@@ -45,7 +45,7 @@ const Navbar = () => {
                     </div>
                     <Link to={'/'} className='flex gap-2 items-center'>
                         <img src={logo} alt="" className='w-15 bg-wi' />
-                        <span className={'text-[#02a2a2] font-bold text-xl'}>Wisdom<span className='text-primary'>Cell</span> </span>
+                        <span className={'text-[#02a2a2] font-bold text-xl'}>Wisdom<span className='text-primary'>Vault</span> </span>
                     </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
@@ -58,59 +58,71 @@ const Navbar = () => {
                 <div className="navbar-end">
                     {user ? (
                         <>
-                            {/* Dropdown Menu */}
-                            <div className='relative'>
-                                <div className='flex flex-row items-center gap-3'>
-                                    {/* Dropdown btn */}
-                                    <div
-                                        onClick={() => setIsOpen(!isOpen)}
-                                        className='p-4 md:py-1 md:px-2 border border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition'
-                                    >
-                                        <AiOutlineMenu />
-                                        <div className='hidden md:block'>
-                                            {/* Avatar */}
-                                            <img
-                                                className='rounded-full'
-                                                referrerPolicy='no-referrer'
-                                                src={user && user.photoURL ? user.photoURL : avatarImg}
-                                                alt='profile'
-                                                height='30'
-                                                width='30'
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
+                            {/* Profile Dropdown */}
+                            <div className="relative z-50">
+                                {/* Trigger */}
+                                <button
+                                    onClick={() => setIsOpen(!isOpen)}
+                                    className="flex items-center gap-3 p-2 rounded-full border border-gray-200 hover:shadow-md transition bg-white"
+                                >
+                                    <AiOutlineMenu className="text-xl" />
+                                    <img
+                                        className="h-9 w-9 rounded-full object-cover"
+                                        referrerPolicy="no-referrer"
+                                        src={user?.photoURL || avatarImg}
+                                        alt="profile"
+                                    />
+                                </button>
+
+                                {/* Dropdown */}
                                 {isOpen && (
-                                    <div className='absolute z-10 rounded-xl shadow-md w-[40vw] md:w-[10vw] bg-white overflow-hidden right-0 top-12 text-sm'>
-                                        <div className='flex flex-col cursor-pointer'>
-                                            <div
-                                                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
-                                            >
-                                                {user?.displayName}
-                                            </div>
+                                    <div className="absolute right-0 mt-3 w-64 rounded-xl bg-white shadow-xl border-2 border-secondary overflow-hidden z-50">
+
+                                        {/* User Info */}
+                                        <div className="px-4 py-3 border-b border-gray-300 bg-gray-50">
+                                            <p className="font-semibold text-gray-800 truncate">
+                                                {user?.displayName || "Anonymous User"}
+                                            </p>
+                                            <p className="text-xs text-gray-500 truncate">
+                                                {user?.email}
+                                            </p>
+                                        </div>
+
+                                        {/* Menu Items */}
+                                        <div className="flex flex-col text-sm">
                                             <Link
-                                                to={'/dashboard/profile'}
-                                                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
+                                                to="/dashboard/profile"
+                                                className="px-4 py-3 hover:bg-teal-100 transition flex items-center gap-2 font-semibold"
+                                                onClick={() => setIsOpen(false)}
                                             >
-                                                Profile
+                                                👤 Profile
                                             </Link>
+
                                             <Link
-                                                to={'/dashboard'}
-                                                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
+                                                to="/dashboard"
+                                                className="px-4 py-3 hover:bg-teal-100 transition flex items-center gap-2 border-b border-gray-300 font-semibold"
+                                                onClick={() => setIsOpen(false)}
                                             >
-                                                Dashboard
+                                                📊 Dashboard
                                             </Link>
-                                            <div
-                                                onClick={logOut}
-                                                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
+
+                                            
+
+                                            <button
+                                                onClick={() => {
+                                                    logOut();
+                                                    setIsOpen(false);
+                                                }}
+                                                className="px-4 py-3 hover:bg-red-50 text-primary transition flex items-center gap-2 font-semibold"
                                             >
-                                                Logout
-                                            </div>
+                                                🚪 Logout
+                                            </button>
                                         </div>
                                     </div>
                                 )}
                             </div>
                         </>
+
                     ) : (
                         <div className='space-x-1.5'>
                             <Link
