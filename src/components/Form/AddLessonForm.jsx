@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
-// import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { imageUpload } from "../../utils";
 import useRole from "../../hooks/useRole";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+// import LessonUploadAnimation from "../Lottie/LessonUploadAnimation";
 
 const categories = [
     "Personal Growth",
@@ -71,7 +71,7 @@ const AddLessonForm = () => {
 
             if (res.data.insertedId || res.data._id) {
                 Swal.fire({
-                    icon: "success",
+                    // html:<LessonUploadAnimation/>,
                     text: "Lesson posted successfully!",
                     timer: 1500,
                     showConfirmButton: false,

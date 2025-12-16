@@ -62,10 +62,15 @@ const FeaturedLessons = () => {
                             modules={[EffectCoverflow, Autoplay]}
                             className="mySwiper"
                         >
+
+                        {/* my opinion */}
                             {
-                                featuredLessons.map((lesson) => <SwiperSlide key={lesson._id}>
-                                    <LessonCard lesson={lesson} />
-                                </SwiperSlide>)
+                                Array.isArray(featuredLessons) &&
+                                featuredLessons.map((lesson) => (
+                                    <SwiperSlide key={lesson._id}>
+                                        <LessonCard lesson={lesson} />
+                                    </SwiperSlide>
+                                ))
                             }
 
                         </Swiper>
