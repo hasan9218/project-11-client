@@ -1,64 +1,69 @@
 // pages/Dashboard/Admin/ManageLessons.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
-import { FaTrash, FaStar, FaCheckCircle, FaEye, FaEyeSlash } from 'react-icons/fa';
+import {
+    FaTrash, FaStar, FaCheckCircle, FaEye, FaEyeSlash
+} from 'react-icons/fa';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import ManageStats from './ManageStats';
 import ManageFilter from './ManageFilter';
+import LoadingSpinner from '../../../../components/Shared/LoadingSpinner';
 
 const ManageLessons = () => {
     const axiosSecure = useAxiosSecure();
-    const [lessons, setLessons] = useState([]);
-    const [stats, setStats] = useState(null);
-    console.log(stats)
-    console.log(lessons)
+
     const [filterCategory, setFilterCategory] = useState('all');
     const [filterPrivacy, setFilterPrivacy] = useState('all');
     const [showReportedOnly, setShowReportedOnly] = useState(false);
 
-    // fetch lessons
-    useEffect(() => {
-        const getResult = async () => {
+    // Fetch lessons
+    const {
+        data: lessonsData,
+        refetch: refetchLessons,
+        isLoading
+    } = useQuery({
+        queryKey: ['adminLessons', filterCategory],
+        queryFn: async () => {
             const result = await axiosSecure.get('/lessons', {
                 params: {
-                    category: filterCategory,
-                    admin: true
+                    category: filterCategory !== 'all' ? filterCategory : '',
+                    admin: 'true',
+                    reportedOnly: showReportedOnly ? 'true' : 'false'
                 }
-            })
-            setLessons(result?.data?.result)
-            setStats(result?.data?.stats)
-            console.log(result)
+            });
+            return result.data;
         }
-        getResult()
-    }, [filterCategory, axiosSecure]);
-    
-    // report
-    const { data: reports = [], refetch } = useQuery({
+    });
+
+    // Extract data
+    const lessons = lessonsData?.result || [];
+    const stats = lessonsData?.stats || {};
+
+    // Fetch reports
+    const { data: reports = [], refetch: refetchReports } = useQuery({
         queryKey: ['reports'],
         queryFn: async () => {
             const res = await axiosSecure.get('/reports');
             return res.data;
         }
     });
-    const reportedData = reports.map(r => r.lessonId).length
 
-   
-
-    // selected filters
+    // Final filter
     const filteredLessons = lessons.filter(lesson => {
-        
         if (filterPrivacy !== 'all' && lesson.privacy !== filterPrivacy) {
             return false;
         }
+
         if (showReportedOnly) {
             const found = reports.find(r => r.lessonId === lesson._id);
             if (!found) return false;
         }
+
         return true;
     });
 
-    // delete lesson
+    // Delete lesson
     const handleDeleteLesson = (lessonId, lessonTitle) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -72,7 +77,8 @@ const ManageLessons = () => {
             if (result.isConfirmed) {
                 try {
                     await axiosSecure.delete(`/my-lesson/${lessonId}`);
-                    refetch();
+                    refetchLessons();
+                    refetchReports();
                     Swal.fire('Deleted!', 'Lesson has been removed.', 'success');
                 } catch (error) {
                     console.error('Delete error:', error);
@@ -88,7 +94,7 @@ const ManageLessons = () => {
             await axiosSecure.patch(`/lesson/${lessonId}/feature`, {
                 isFeatured: !currentStatus
             });
-            refetch();
+            refetchLessons(); 
             Swal.fire({
                 icon: 'success',
                 title: currentStatus ? 'Unfeatured!' : 'Featured!',
@@ -103,11 +109,11 @@ const ManageLessons = () => {
         }
     };
 
-    //reviewed
+    // Mark as reviewed
     const handleMarkReviewed = async (lessonId) => {
         try {
             await axiosSecure.patch(`/lesson/${lessonId}/reviewed`);
-            refetch();
+            refetchLessons();
             Swal.fire('Reviewed!', 'Lesson marked as reviewed', 'success');
         } catch (error) {
             console.error('Review error:', error);
@@ -115,6 +121,8 @@ const ManageLessons = () => {
         }
     };
 
+    // Show loading
+    if (isLoading) return <LoadingSpinner></LoadingSpinner>
     return (
         <div className="p-6">
             <div className="mb-8">
@@ -133,7 +141,6 @@ const ManageLessons = () => {
                 showReportedOnly={showReportedOnly}
                 filterPrivacy={filterPrivacy}
                 filterCategory={filterCategory}
-                reportedData={reportedData}
             ></ManageFilter>
 
             {/* Lessons Table */}
@@ -151,75 +158,76 @@ const ManageLessons = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredLessons.map(lesson => (
-                                <tr key={lesson._id} className="hover:bg-gray-50">
-                                    <td>
-                                        <div className="font-medium max-w-xs truncate">{lesson.title}</div>
-                                        <div className="text-xs text-gray-500">
-                                            {new Date(lesson.createdAt).toLocaleDateString()}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className="flex items-center gap-2">
-                                            <div className="avatar">
-                                                <div className="w-8 h-8 rounded-full">
-                                                    <img src={lesson.authorPhoto} alt={lesson.authorName} />
-                                                </div>
+                            {filteredLessons.length > 0 ? (
+                                filteredLessons.map(lesson => (
+                                    <tr key={lesson._id} className="hover:bg-gray-50">
+                                        <td>
+                                            <div className="font-medium max-w-xs truncate">{lesson.title}</div>
+                                            <div className="text-xs text-gray-500">
+                                                {new Date(lesson.createdAt).toLocaleDateString()}
                                             </div>
-                                            <span className="text-sm">{lesson.authorName}</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <span className="badge badge-outline">{lesson.category}</span>
-                                    </td>
-                                    <td>
-                                        <span className={`badge ${lesson.privacy === 'public' ? 'badge-success' : 'badge-info'}`}>
-                                            {lesson.privacy === 'public' ? <FaEye className="mr-1" /> : <FaEyeSlash className="mr-1" />}
-                                            {lesson.privacy}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span className={`badge ${lesson.isFeatured ? 'badge-warning' : 'badge-outline'}`}>
-                                            {lesson.isFeatured ? 'Featured' : 'Regular'}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <div className="flex gap-2">
-                                            {/* Feature/Unfeature Button */}
-                                            <button
-                                                onClick={() => handleToggleFeatured(lesson._id, lesson.isFeatured)}
-                                                className={`btn btn-xs ${lesson.isFeatured ? 'btn-warning' : 'btn-outline'}`}
-                                                title={lesson.isFeatured ? 'Remove from featured' : 'Feature this lesson'}
-                                            >
-                                                <FaStar className={lesson.isFeatured ? 'fill-white' : ''} />
-                                            </button>
+                                        </td>
+                                        <td>
+                                            <div className="flex items-center gap-2">
+                                                <div className="avatar">
+                                                    <div className="w-8 h-8 rounded-full">
+                                                        <img src={lesson.authorPhoto} alt={lesson.authorName} />
+                                                    </div>
+                                                </div>
+                                                <span className="text-sm">{lesson.authorName}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span className="badge ">{lesson.category}</span>
+                                        </td>
+                                        <td>
+                                            <span className={`badge ${lesson.privacy === 'public' ? 'badge-success' : 'badge-info'}`}>
+                                                {lesson.privacy === 'public' ? <FaEye className="mr-1" /> : <FaEyeSlash className="mr-1" />}
+                                                {lesson.privacy}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span className={`badge ${lesson.isFeatured ? 'badge-warning' : 'badge-outline'}`}>
+                                                {lesson.isFeatured ? 'Featured' : 'Regular'}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div className="flex gap-2">
+                                                {/* Feature/Unfeature Button */}
+                                                <button
+                                                    onClick={() => handleToggleFeatured(lesson._id, lesson.isFeatured)}
+                                                    className={`btn btn-xs ${lesson.isFeatured ? 'btn-warning' : 'btn-outline'}`}
+                                                    title={lesson.isFeatured ? 'Remove from featured' : 'Feature this lesson'}
+                                                >
+                                                    <FaStar className={lesson.isFeatured ? 'fill-white' : ''} />
+                                                </button>
 
-                                            {/* Mark as Reviewed Button */}
-                                            <button
-                                                onClick={() => handleMarkReviewed(lesson._id)}
-                                                className="btn btn-xs btn-success"
-                                                title="Mark as reviewed"
-                                            >
-                                                <FaCheckCircle />
-                                            </button>
+                                                {/* Mark as Reviewed Button */}
+                                                <button
+                                                    onClick={() => handleMarkReviewed(lesson._id)}
+                                                    className={`btn btn-xs ${lesson.isReviewed ? 'bg-gray-300 text-gray-600' : 'btn-success'}`}
+                                                    title={lesson.isReviewed ? "Already reviewed" : "Mark as reviewed"}
+                                                    disabled={lesson.isReviewed}
+                                                >
+                                                    <FaCheckCircle className={lesson.isReviewed ? 'text-gray-500' : 'text-white'} />
+                                                </button>
 
-                                            {/* Delete Button */}
-                                            <button
-                                                onClick={() => handleDeleteLesson(lesson._id, lesson.title)}
-                                                className="btn btn-xs btn-error"
-                                                title="Delete lesson"
-                                            >
-                                                <FaTrash />
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-
-                            {filteredLessons.length === 0 && (
+                                                {/* Delete Button */}
+                                                <button
+                                                    onClick={() => handleDeleteLesson(lesson._id, lesson.title)}
+                                                    className="btn btn-xs btn-error"
+                                                    title="Delete lesson"
+                                                >
+                                                    <FaTrash />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
                                 <tr>
                                     <td colSpan="7" className="text-center py-8 text-gray-500">
-                                        No lessons found with current filters
+                                        No lessons found {lessons.length === 0 ? 'in the system' : 'with current filters'}
                                     </td>
                                 </tr>
                             )}

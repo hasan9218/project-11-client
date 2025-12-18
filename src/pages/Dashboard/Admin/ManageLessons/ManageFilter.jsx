@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaEye, FaEyeSlash, FaFilter, FaFlag, FaSort } from 'react-icons/fa';
 
-const ManageFilter = ({setFilterCategory,setFilterPrivacy,setShowReportedOnly,filterPrivacy,showReportedOnly,filterCategory,stats}) => {
+const ManageFilter = ({setFilterCategory,setFilterPrivacy,setShowReportedOnly,filterPrivacy,showReportedOnly,filterCategory}) => {
     return (
         <div className="bg-white shadow-md rounded-lg p-4 mb-6">
                         <div className="flex flex-wrap items-center justify-between gap-4">
@@ -81,7 +81,7 @@ const ManageFilter = ({setFilterCategory,setFilterPrivacy,setShowReportedOnly,fi
                                         className={`flex items-center gap-1 pb-1 border-b-2 transition-all ${showReportedOnly ? 'text-red-600 border-red-600' : 'text-gray-700 hover:text-red-600 hover:border-red-600 border-transparent'}`}
                                     >
                                         <FaFlag />
-                                        Report {showReportedOnly && `(${stats.reported})`}
+                                        Report
                                     </button>
                                 </div>
         
