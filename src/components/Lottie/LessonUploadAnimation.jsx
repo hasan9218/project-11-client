@@ -1,5 +1,5 @@
 import React from 'react';
-import lessonUploaded from '../../../public/lessonUploaded.json';
+import lessonUploaded from '../../assets/animation/lessonUploaded.json'
 import Lottie from "lottie-react"
 const LessonUploadAnimation = () => {
     return (

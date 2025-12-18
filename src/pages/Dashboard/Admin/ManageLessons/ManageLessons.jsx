@@ -1,62 +1,64 @@
 // pages/Dashboard/Admin/ManageLessons.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
-import {
-    FaTrash, FaStar, FaCheckCircle, FaEye, FaEyeSlash
-} from 'react-icons/fa';
+import { FaTrash, FaStar, FaCheckCircle, FaEye, FaEyeSlash } from 'react-icons/fa';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import ManageStats from './ManageStats';
 import ManageFilter from './ManageFilter';
 
 const ManageLessons = () => {
     const axiosSecure = useAxiosSecure();
+    const [lessons, setLessons] = useState([]);
+    const [stats, setStats] = useState(null);
+    console.log(stats)
+    console.log(lessons)
     const [filterCategory, setFilterCategory] = useState('all');
     const [filterPrivacy, setFilterPrivacy] = useState('all');
     const [showReportedOnly, setShowReportedOnly] = useState(false);
 
-    // all lessons
-    const { data: lessons = [], refetch } = useQuery({
-        queryKey: ['allLessons'],
-        queryFn: async () => {
-            const res = await axiosSecure.get('/lessons');
-            return res.data;
+    // fetch lessons
+    useEffect(() => {
+        const getResult = async () => {
+            const result = await axiosSecure.get('/lessons', {
+                params: {
+                    category: filterCategory,
+                    admin: true
+                }
+            })
+            setLessons(result?.data?.result)
+            setStats(result?.data?.stats)
+            console.log(result)
         }
-    });
+        getResult()
+    }, [filterCategory, axiosSecure]);
+    
     // report
-    const { data: reports = [] } = useQuery({
+    const { data: reports = [], refetch } = useQuery({
         queryKey: ['reports'],
         queryFn: async () => {
             const res = await axiosSecure.get('/reports');
             return res.data;
         }
     });
+    const reportedData = reports.map(r => r.lessonId).length
 
-    // Calculate stats
-    const stats = {
-        total: lessons.length,
-        public: lessons.filter(l => l.privacy === 'public').length,
-        private: lessons.filter(l => l.privacy === 'private').length,
-        featured: lessons.filter(l => l.isFeatured).length,
-        reported: reports.map(r => r.lessonId).length
-    };
+   
 
-    // Filter lessons based on selected filters
+    // selected filters
     const filteredLessons = lessons.filter(lesson => {
-        if (filterCategory !== 'all' && lesson.category !== filterCategory) {
-            return false;
-        }
+        
         if (filterPrivacy !== 'all' && lesson.privacy !== filterPrivacy) {
             return false;
         }
         if (showReportedOnly) {
-            const report = reports.find(r => r.lessonId === lesson._id);
-            if (!report) return false;
+            const found = reports.find(r => r.lessonId === lesson._id);
+            if (!found) return false;
         }
         return true;
     });
 
-    // Handle delete lesson
+    // delete lesson
     const handleDeleteLesson = (lessonId, lessonTitle) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -80,7 +82,7 @@ const ManageLessons = () => {
         });
     };
 
-    // Handle toggle featured
+    // Toggle featured
     const handleToggleFeatured = async (lessonId, currentStatus) => {
         try {
             await axiosSecure.patch(`/lesson/${lessonId}/feature`, {
@@ -101,7 +103,7 @@ const ManageLessons = () => {
         }
     };
 
-    // Handle mark as reviewed
+    //reviewed
     const handleMarkReviewed = async (lessonId) => {
         try {
             await axiosSecure.patch(`/lesson/${lessonId}/reviewed`);
@@ -131,7 +133,7 @@ const ManageLessons = () => {
                 showReportedOnly={showReportedOnly}
                 filterPrivacy={filterPrivacy}
                 filterCategory={filterCategory}
-                stats={stats}
+                reportedData={reportedData}
             ></ManageFilter>
 
             {/* Lessons Table */}
