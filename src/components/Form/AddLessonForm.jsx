@@ -5,7 +5,7 @@ import { useState } from "react";
 import { imageUpload } from "../../utils";
 import useRole from "../../hooks/useRole";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-// import LessonUploadAnimation from "../Lottie/LessonUploadAnimation";
+import LessonUploadAnimation from "../Lottie/LessonUploadAnimation";
 
 const categories = [
     "Personal Growth",
@@ -26,9 +26,10 @@ const AddLessonForm = () => {
     const { register, handleSubmit, reset } = useForm();
     const { user } = useAuth();
     const { userData } = useRole();
-    const axiosSecure=useAxiosSecure();
+    const axiosSecure = useAxiosSecure();
 
     const [loading, setLoading] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
 
     const onSubmit = async (data) => {
         // data
@@ -63,20 +64,19 @@ const AddLessonForm = () => {
             if (data.image?.[0]) {
                 lessonData.image = imageURL
             }
-            else{
-                lessonData.image= null;
+            else {
+                lessonData.image = null;
             }
 
             const res = await axiosSecure.post(`/lessons`, lessonData);
 
             if (res.data.insertedId || res.data._id) {
-                Swal.fire({
-                    // html:<LessonUploadAnimation/>,
-                    text: "Lesson posted successfully!",
-                    timer: 1500,
-                    showConfirmButton: false,
-                });
+                setShowSuccess(true);
                 reset();
+
+                setTimeout(() => {
+                    setShowSuccess(false);
+                }, 2500);
             }
         } catch (err) {
             console.error(err);
@@ -155,7 +155,7 @@ const AddLessonForm = () => {
 
                 {/* Access Level (Free/Premium) */}
                 <div className="tooltip tooltip-right"
-                  data-tip={!userData?.isPremium ? "Upgrade to Premium to create paid lessons" : ""}
+                    data-tip={!userData?.isPremium ? "Upgrade to Premium to create paid lessons" : ""}
                 >
                     <select
                         {...register("accessLevel")}
@@ -177,6 +177,27 @@ const AddLessonForm = () => {
                     {loading ? "Posting..." : "Submit Lesson"}
                 </button>
             </form>
+             {/* Success Modal */}
+            {showSuccess && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                    <div
+                        className="absolute inset-0 bg-black bg-opacity-50"
+                        onClick={() => setShowSuccess(false)}
+                    ></div>
+
+                    <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full">
+                        <LessonUploadAnimation />
+                        <div className="p-4 border-t">
+                            <button
+                                onClick={() => setShowSuccess(false)}
+                                className="btn btn-primary w-full"
+                            >
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

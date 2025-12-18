@@ -132,11 +132,11 @@ const MyLesson = () => {
                                     {/* Toggle Access */}
                                     <td>
                                         <button
-                                            className="btn btn-xs"
+                                            className="btn btn-sm"
                                             disabled={!userData?.isPremium}
                                             onClick={() => handleToggleAccess(lesson._id, lesson.accessLevel)}
                                         >
-                                            {lesson.accessLevel === "free" ? "Free" : "Premium 💎"}
+                                            {lesson.accessLevel === "free" ? "Free" : "Premium"}
                                         </button>
 
                                         {!userData?.isPremium && (
