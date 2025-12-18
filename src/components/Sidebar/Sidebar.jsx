@@ -3,7 +3,7 @@ import { NavLink } from 'react-router';
 import { LuNotebookPen } from "react-icons/lu";
 import { FaHeart, FaListAlt, FaUserCog, FaUsers } from "react-icons/fa";
 import { IoHome } from "react-icons/io5";
-import { MdReportProblem } from "react-icons/md";
+import { MdDashboard, MdReportProblem } from "react-icons/md";
 const Sidebar = () => {
     return (
         <div className='space-y-2.5'>
@@ -15,6 +15,14 @@ const Sidebar = () => {
                     
                     <IoHome className='text-primary font-bold' />
                     <span className="is-drawer-close:hidden">Home</span>
+                </NavLink>
+                <NavLink
+                    to={'/dashboard'}
+                    className={({ isActive }) => `is-drawer-close:tooltip is-drawer-close:tooltip-right text-primary ${isActive ? 'text-secondary' : ''}`}
+                    data-tip="Dashboard">
+                    {/* icon */}
+                    <MdDashboard className='text-primary font-bold' />
+                    <span className="is-drawer-close:hidden">Dashboard</span>
                 </NavLink>
             </li>
             <li>
