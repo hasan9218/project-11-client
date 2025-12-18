@@ -21,19 +21,43 @@ const MyLesson = () => {
             return result.data;
         }
     })
-    // loading
-    if (isLoading) return <LoadingSpinner />
+    // privacy toggle
+    const handleTogglePrivacy = (id, currentPrivacy) => {
+        const newPrivacy = currentPrivacy === "public" ? "private" : "public";
 
-    // Handlers (to connect later with API)
-    const handleTogglePrivacy = (id) => {
-        console.log("Toggle privacy for:", id);
-        // TODO: PATCH /lessons/:id { privacy: "..." }
+        axiosSecure.patch(`/lesson/${id}/privacy`, {
+            privacy: newPrivacy
+        })
+            .then(() => {
+                refetch();
+                Swal.fire({
+                    icon: "success",
+                    title: "Updated!",
+                    text: `Lesson is now ${newPrivacy}`,
+                    timer: 1200,
+                    showConfirmButton: false
+                });
+            });
     };
 
-    const handleToggleAccess = (id) => {
+    // access toggle
+    const handleToggleAccess = (id, currentAccess) => {
         if (!userData?.isPremium) return;
-        console.log("Toggle access level for:", id);
-        //     // TODO: PATCH /lessons/:id { accessLevel: "..." }
+        const newAccess = currentAccess === "free" ? "premium" : "free";
+
+        axiosSecure.patch(`/lesson/${id}/access`, {
+            accessLevel: newAccess
+        })
+            .then(() => {
+                refetch();
+                Swal.fire({
+                    icon: "success",
+                    title: "Updated!",
+                    text: `Access set to ${newAccess}`,
+                    timer: 1200,
+                    showConfirmButton: false
+                });
+            });
     };
 
     // delete
@@ -65,7 +89,8 @@ const MyLesson = () => {
     };
 
 
-
+    // loading
+    if (isLoading) return <LoadingSpinner />
     return (
         <div className="p-10 ">
             <div className="p-6 bg-white rounded-xl shadow">
@@ -98,22 +123,20 @@ const MyLesson = () => {
                                     <td>
                                         <button
                                             className="btn btn-xs"
-                                            onClick={() => handleTogglePrivacy(lesson._id)}
+                                            onClick={() => handleTogglePrivacy(lesson._id, lesson.privacy)}
                                         >
                                             {lesson.privacy === "public" ? "Public" : "Private"}
                                         </button>
                                     </td>
 
-                                    {/* Toggle Access (premium users only) */}
+                                    {/* Toggle Access */}
                                     <td>
                                         <button
                                             className="btn btn-xs"
                                             disabled={!userData?.isPremium}
-                                            onClick={() => handleToggleAccess(lesson._id)}
+                                            onClick={() => handleToggleAccess(lesson._id, lesson.accessLevel)}
                                         >
-                                            {lesson.accessLevel === "free"
-                                                ? "Free"
-                                                : "Premium 💎"}
+                                            {lesson.accessLevel === "free" ? "Free" : "Premium 💎"}
                                         </button>
 
                                         {!userData?.isPremium && (
