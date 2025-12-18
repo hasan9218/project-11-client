@@ -18,7 +18,7 @@ const LessonContent = ({ lesson, isLocked }) => {
         <img
           src={lesson.image}
           alt={lesson.title}
-          className={`rounded-lg mt-3 shadow-lg ${isLocked && "blur-sm opacity-70"}`}
+          className={`rounded-lg mt-3 shadow-lg h-70 w-full ${isLocked && "blur-sm opacity-70"}`}
         />
       )}
 

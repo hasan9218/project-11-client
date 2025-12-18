@@ -181,7 +181,7 @@ const AddLessonForm = () => {
             {showSuccess && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     <div
-                        className="absolute inset-0 bg-black bg-opacity-50"
+                        className="absolute inset-0 bg-gray-200 bg-opacity-50"
                         onClick={() => setShowSuccess(false)}
                     ></div>
 
@@ -190,7 +190,7 @@ const AddLessonForm = () => {
                         <div className="p-4 border-t">
                             <button
                                 onClick={() => setShowSuccess(false)}
-                                className="btn btn-primary w-full"
+                                className="btn btn-secondary w-full"
                             >
                                 Continue
                             </button>
