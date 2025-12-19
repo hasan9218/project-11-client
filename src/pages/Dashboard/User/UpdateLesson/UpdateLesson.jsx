@@ -10,7 +10,6 @@ const UpdateLesson = ({ lesson ,refetch}) => {
     const handleUpdate = (id) => {
         setIsOpen(true)
         console.log("Update lesson:", id);
-        // TODO: Navigate to update page → navigate(`/dashboard/my-lessons/${id}/edit`)
     };
     return (
         <>

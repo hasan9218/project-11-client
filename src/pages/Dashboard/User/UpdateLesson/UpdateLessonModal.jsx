@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogPanel } from '@headlessui/react'
 import { useForm } from 'react-hook-form';
 import { imageUpload } from '../../../../utils';
-import axios from 'axios';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 
 
 const categories = [
@@ -23,6 +23,7 @@ const emotionalTones = [
 
 const UpdateLessonModal = ({ closeModal, isOpen, lesson, refetch }) => {
     const { register, handleSubmit, reset } = useForm();
+    const axiosSecure=useAxiosSecure();
 
     const [loading, setLoading] = useState(false);
 
@@ -57,7 +58,7 @@ const UpdateLessonModal = ({ closeModal, isOpen, lesson, refetch }) => {
                 lessonData.image = image;
             }
 
-            const res = await axios.patch(`${import.meta.env.VITE_API_URL}/my-lesson/${lesson._id}`, lessonData);
+            const res = await axiosSecure.patch(`/my-lesson/${lesson._id}`, lessonData);
 
             if (res.data.modifiedCount) {
                 refetch()
