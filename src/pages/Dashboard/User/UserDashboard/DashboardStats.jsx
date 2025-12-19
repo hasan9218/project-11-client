@@ -30,7 +30,7 @@ const DashboardStats = () => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            <div className="bg-amber-50 shadow rounded-xl p-6 flex items-center gap-4">
+            <div className="bg-blue-50 shadow rounded-xl p-6 flex items-center gap-4">
                 <FaBook className="text-3xl text-secondary" />
                 <div>
                     <p className="text-sm text-gray-500">Total Lessons Created</p>
@@ -38,7 +38,7 @@ const DashboardStats = () => {
                 </div>
             </div>
 
-            <div className="bg-amber-50 shadow rounded-xl p-6 flex items-center gap-4">
+            <div className="bg-blue-50 shadow rounded-xl p-6 flex items-center gap-4">
                 <FaHeart className="text-3xl text-red-500" />
                 <div>
                     <p className="text-sm text-gray-500">Saved Lessons</p>

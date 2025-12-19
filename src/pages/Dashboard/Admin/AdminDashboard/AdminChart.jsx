@@ -9,16 +9,23 @@ const AdminChart = () => {
         queryKey: ['lessonGrowth'],
         queryFn: async () => {
             const res = await axiosSecure.get('/lessons');
-            return res.data.result;
+            return res.data.result || [];
         }
     });
 
-    const chartData = lessons.reduce((acc, lesson) => {
-        const date = lesson.createdAt?.slice(0, 10);
-        const found = acc.find(d => d.date === date);
+    // sort lessons by date (important for chart)
+    const sortedLessons = [...lessons].sort(
+        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+    );
+
+    const chartData = sortedLessons.reduce((acc, lesson) => {
+        if (!lesson.createdAt) return acc;
+
+        const date = lesson.createdAt.slice(0, 10);
+        const found = acc.find(item => item.date === date);
 
         if (found) {
-            found.count += 1;
+            found.count = found.count + 1;
         } else {
             acc.push({ date, count: 1 });
         }
@@ -32,9 +39,15 @@ const AdminChart = () => {
             <ResponsiveContainer width="100%" height={250}>
                 <LineChart data={chartData}>
                     <XAxis dataKey="date" />
-                    <YAxis />
+                    <YAxis allowDecimals={false} />
                     <Tooltip />
                     <Line type="monotone" dataKey="count" stroke="#8884d8" />
+                    <Line
+                        type="monotone"
+                        dataKey="count"
+                        stroke="#6366f1"
+                        strokeWidth={2}
+                    />
                 </LineChart>
             </ResponsiveContainer>
         </div>
