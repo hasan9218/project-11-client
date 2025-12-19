@@ -15,7 +15,7 @@ const TopContributors = () => {
 
   return (
     <div className="bg-primary text-white p-8 mb-16">
-      <div className="grid md:grid-cols-2 gap-8 items-center">
+      <div className="grid md:grid-cols-2 gap-8 items-center max-w-6xl mx-auto">
 
         {/* LEFT */}
         <div>
