@@ -14,13 +14,13 @@ const TopContributors = () => {
   });
 
   return (
-    <div className="bg-primary text-white rounded-2xl p-8 mb-16">
+    <div className="bg-primary text-white p-8 mb-16">
       <div className="grid md:grid-cols-2 gap-8 items-center">
 
         {/* LEFT */}
         <div>
           <h2 className="text-3xl font-bold mb-2">
-            🌟 Top Contributors of the Week
+            Top Contributors of the Week
           </h2>
           <p className="text-sm opacity-90">
             Creators who shared the most valuable lessons.

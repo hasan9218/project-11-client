@@ -10,6 +10,7 @@ import LessonStats from "../../components/Home/Details/LessonStats";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
+import NotFound from "../NotFound";
 
 const LessonDetails = () => {
   const { userData } = useRole();
@@ -27,7 +28,9 @@ const LessonDetails = () => {
       return result.data;
     }
   })
-  
+  if(!lesson){
+    return <NotFound/>
+  }
   // loading
   if(isLoading) return <LoadingSpinner/>
 
@@ -37,7 +40,7 @@ const LessonDetails = () => {
   return (
     <div className="max-w-5xl mx-auto py-10 px-4 space-y-10">
 
-      {/* Premium Restriction Check */}
+      {/* Premium Check */}
       {isLocked && (
         <div className="bg-warning text-center text-white p-4 rounded-lg shadow-md">
           <p className="text-lg font-semibold">🔒 Premium Lesson</p>

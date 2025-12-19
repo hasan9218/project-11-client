@@ -10,7 +10,7 @@ import mobile from '../../assets/mobile.png'
 
 const Banner = () => {
     return (
-        <div className="w-11/12 mx-auto p-10 rounded-lg ">
+        <div className="w-11/12 mx-auto px-10 pb-10 rounded-lg">
             <h2 className="text-3xl font-bold text-center">
                 Wisdom That Shapes Lives
             </h2>
