@@ -17,7 +17,7 @@ const LessonCard = ({ lesson }) => {
                 {/* Hover Overlay */}
                 {isLocked && (
                     <div
-                        className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center gap-2 text-white rounded-xl opacity-0 group-hover:opacity-100 transition z-20 backdrop-blur-sm">
+                        className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center gap-2 text-white rounded-xl opacity-0 group-hover:opacity-80 transition z-20 backdrop-blur-sm">
                         <FiLock size={28} />
                         <p className="font-semibold text-center">
                             Premium Lesson — Upgrade to view
