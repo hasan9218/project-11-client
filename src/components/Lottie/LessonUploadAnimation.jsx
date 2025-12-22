@@ -1,6 +1,7 @@
 import React from 'react';
 import lessonUploaded from '../../assets/animation/lessonUploaded.json';
 import Lottie from "lottie-react";
+
 const LessonUploadAnimation = () => {
     return (
         <div className='flex flex-col items-center justify-center p-8 bg-white rounded-2xl'>

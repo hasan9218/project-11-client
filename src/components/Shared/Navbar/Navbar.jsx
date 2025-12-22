@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Link, NavLink } from 'react-router'
 import useAuth from '../../../hooks/useAuth'
 import avatarImg from '../../../assets/avater.png'
-import logo from '../../../assets/WisdomVault.png'
+import logo from '../../../assets/logo.png'
 import useRole from '../../../hooks/useRole'
 const Navbar = () => {
     const { user, logOut } = useAuth();
@@ -55,9 +55,9 @@ const Navbar = () => {
                                 }
                             </ul>
                         </div>
-                        <Link to={'/'} className='flex gap-2 items-center'>
-                            <img src={logo} alt="" className='w-15 bg-wi' />
-                            <span className={'text-[#02a2a2] font-bold text-xl'}>Wisdom<span className='text-primary'>Vault</span> </span>
+                        <Link to={'/'} className='flex items-center'>
+                            <img src={logo} alt="" className='w-15' />
+                            <span className={'text-primary font-extrabold text-2xl font-[Rubik_Broken_Fax]'}>Wisdom<span className='text-green-700'>Cell</span> </span>
                         </Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
@@ -75,7 +75,7 @@ const Navbar = () => {
                                     {/* Trigger */}
                                     <button
                                         onClick={() => setIsOpen(!isOpen)}
-                                        className="flex items-center gap-3 p-2 rounded-full border border-gray-200 hover:shadow-md transition bg-white"
+                                        className="flex cursor-pointer items-center gap-3 p-2 rounded-full border border-gray-200 hover:shadow-md transition bg-white"
                                     >
                                         <AiOutlineMenu className="text-xl" />
                                         <img

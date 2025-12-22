@@ -90,8 +90,8 @@ const Profile = () => {
       {/* User Lessons Section (Only for users) */}
       {!isAdmin && (
         <div className="mt-12 max-w-6xl mx-auto">
-          <h3 className="text-xl font-bold mb-4">
-            Lessons by {user?.displayName}
+          <h3 className="text-2xl font-bold mb-4">
+            Lessons by <span className="text-2xl text-primary">{user?.displayName}</span>
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

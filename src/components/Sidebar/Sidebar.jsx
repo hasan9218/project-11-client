@@ -15,7 +15,7 @@ const Sidebar = () => {
                     to={'/'}
                     className={({ isActive }) => `is-drawer-close:tooltip is-drawer-close:tooltip-right text-primary ${isActive ? 'text-secondary' : ''}`}
                     data-tip="Home">
-
+                    {/* icon */}
                     <IoHome className='text-primary font-bold' />
                     <span className="is-drawer-close:hidden">Home</span>
                 </NavLink>
@@ -103,6 +103,7 @@ const Sidebar = () => {
                     </li>
                 </>
             }
+
 
         </div>
     );

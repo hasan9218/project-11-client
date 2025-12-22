@@ -141,7 +141,7 @@ const Payment = () => {
           </div>
 
           {/* Premium Plan */}
-          <div className="bg-linear-to-br from-yellow-50 to-amber-50 rounded-2xl shadow-xl p-8 border-2 border-[#F69074] relative overflow-hidden">
+          <div className="bg-linear-to-br from-purple-50 to-purple-200 rounded-2xl shadow-xl p-8 border-2 border-[#a72095] relative overflow-hidden">
             {/* Popular Badge */}
             <div className="absolute top-0 right-0 bg-primary text-white px-4 py-1 rounded-bl-lg font-semibold">
               Most Popular
@@ -177,7 +177,7 @@ const Payment = () => {
         </div>
 
         {/* banner */}
-        <div className="mt-12 p-8 rounded-2xl bg-linear-to-r from-teal-500 to-teal-700 text-white text-center">
+        <div className="mt-12 p-8 rounded-2xl bg-linear-to-r bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-center">
           <h3 className="text-2xl font-bold mb-4">Ready to unlock premium wisdom?</h3>
           <p className="mb-6 max-w-2xl mx-auto">
             Join thousands of members who have transformed their learning experience with premium access.

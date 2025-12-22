@@ -1,4 +1,3 @@
-import React from 'react';
 import DashboardBanner from './DashboardBanner';
 import DashboardStats from './DashboardStats';
 import RecentLessons from './RecentLessons';
@@ -6,22 +5,22 @@ import QuickShortcuts from './QuickShortcuts';
 import DashboardAnalytics from './DashboardAnalytics';
 
 const UserDashboard = () => {
-    return (
-        <div className="p-6 space-y-10">
+  return (
+    <div className="p-6 space-y-10">
 
-            <DashboardBanner />
+      <DashboardBanner />
 
-            <DashboardStats />
+      <DashboardStats />
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <RecentLessons />
-                <QuickShortcuts />
-            </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <RecentLessons />
+        <QuickShortcuts />
+      </div>
 
-            <DashboardAnalytics />
+      <DashboardAnalytics />
 
-        </div>
-    );
+    </div>
+  );
 };
 
 export default UserDashboard;

@@ -29,6 +29,7 @@ const AdminChart = () => {
         } else {
             acc.push({ date, count: 1 });
         }
+
         return acc;
     }, []);
 
@@ -41,7 +42,6 @@ const AdminChart = () => {
                     <XAxis dataKey="date" />
                     <YAxis allowDecimals={false} />
                     <Tooltip />
-                    <Line type="monotone" dataKey="count" stroke="#8884d8" />
                     <Line
                         type="monotone"
                         dataKey="count"

@@ -117,12 +117,12 @@ const Login = () => {
           <div>
             <button
               type='submit'
-              className='bg-secondary w-full rounded-md py-3 text-white'
+              className='bg-secondary w-full cursor-pointer rounded-md py-3 text-white'
             >
               {loading ? (
                 <TbFidgetSpinner className='animate-spin m-auto' />
               ) : (
-                'Continue'
+                'Login'
               )}
             </button>
           </div>
@@ -152,7 +152,7 @@ const Login = () => {
           <Link
             state={from}
             to='/signup'
-            className='hover:underline hover:text-secondary text-gray-600'
+            className='hover:underline hover:text-secondary text-lg text-secondary'
           >
             Sign up
           </Link>

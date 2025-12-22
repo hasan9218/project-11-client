@@ -198,7 +198,7 @@ const UpdateLessonModal = ({ closeModal, isOpen, lesson, refetch }) => {
                             <button
 
                                 type='button'
-                                className='cursor-pointer inline-flex justify-center rounded-md border border-transparent bg-teal-100 px-4 py-2 text-sm font-medium text-secondary hover:bg-teal-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2'
+                                className='cursor-pointer text-white inline-flex justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-sm font-medium hover:bg-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2'
                             >
                                 Continue
                             </button>

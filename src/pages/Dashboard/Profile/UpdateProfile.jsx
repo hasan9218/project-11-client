@@ -102,7 +102,7 @@ const UpdateProfile = () => {
                             </div>
                             <button
                                 type='submit'
-                                 className="bg-secondary px-6 py-2 rounded-lg text-white mt-4 hover:bg-teal-700"
+                                 className="bg-secondary cursor-pointer px-6 py-2 rounded-lg text-white mt-4 hover:bg-teal-700"
                             >
                                 {loading ? (
                                     <TbFidgetSpinner className='animate-spin m-auto' />

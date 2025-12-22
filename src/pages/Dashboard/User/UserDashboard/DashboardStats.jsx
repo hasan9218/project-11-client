@@ -38,7 +38,7 @@ const DashboardStats = () => {
                 </div>
             </div>
 
-            <div className="bg-blue-50 shadow rounded-xl p-6 flex items-center gap-4">
+            <div className="bg-red-50 shadow rounded-xl p-6 flex items-center gap-4">
                 <FaHeart className="text-3xl text-red-500" />
                 <div>
                     <p className="text-sm text-gray-500">Saved Lessons</p>

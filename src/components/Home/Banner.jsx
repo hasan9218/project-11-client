@@ -4,25 +4,18 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Link } from "react-router";
-import shareThought from '../../assets/share-thoughts.jpg'
-import join from '../../assets/joinUs.jpg'
-import mobile from '../../assets/mobile.png'
+import banner1 from '../../assets/banner1.jpg'
+import banner2 from '../../assets/banner2.jpg'
+import banner3 from '../../assets/banner3.jpg'
 
 const Banner = () => {
     return (
-        <div className="w-11/12 mx-auto px-10 pb-10 rounded-lg">
-            <h2 className="text-3xl font-bold text-center">
-                Wisdom That Shapes Lives
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto mt-3 mb-6">
-                Preserve, share, and grow from life's most valuable lessons in your personal digital vault
-            </p>
-
+        <div className="w-11/12 mx-auto px-10 pb-10 rounded-lg ">
             <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 spaceBetween={20}
                 slidesPerView={1}
-                navigation
+                navigation={false}
                 pagination={{ clickable: true }}
                 autoplay={{ delay: 4000, disableOnInteraction: false }}
                 loop={true}
@@ -35,7 +28,7 @@ const Banner = () => {
 
                 <SwiperSlide>
                     <div
-                        className='rounded-2xl overflow-hidden shadow-2xl p-6 bg-blue-500/10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[350px]' >
+                        className='rounded-2xl overflow-hidden shadow-2xl p-6 bg-blue-500/10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[500px]' >
 
                         <div className="md:order-1 order-2 p-4">
                             <h2 className="text-2xl lg:text-3xl font-bold mb-3 leading-tight">Organize Lessons by How They Made You Feel</h2>
@@ -46,7 +39,7 @@ const Banner = () => {
 
                         <div className="md:order-2 order-1 flex justify-center items-center">
                             <img
-                                src={shareThought}
+                                src={banner1}
                                 alt='Global Sourcing'
                                 className="w-full h-80 object-cover rounded-xl shadow-2xl transform transition duration-500"
                             />
@@ -59,7 +52,7 @@ const Banner = () => {
                 <SwiperSlide>
 
                     <div
-                        className='rounded-2xl overflow-hidden shadow-2xl p-6 bg-green-500/10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[350px]' >
+                        className='rounded-2xl overflow-hidden shadow-2xl p-6 bg-green-500/10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[500px]' >
 
                         <div className="md:order-1 order-2 p-4">
                             <h2 className="text-2xl lg:text-3xl font-bold mb-3 leading-tight">Capture Insights Anytime, Anywhere</h2>
@@ -70,7 +63,7 @@ const Banner = () => {
 
                         <div className="md:order-2 order-1 flex justify-center items-center">
                             <img
-                                src={mobile}
+                                src={banner2}
                                 alt='Manage Your Exports'
                                 className="w-full h-80 object-cover rounded-xl shadow-2xl transform transition duration-500 "
                             />
@@ -83,7 +76,7 @@ const Banner = () => {
                 <SwiperSlide>
 
                     <div
-                        className='rounded-2xl overflow-hidden shadow-2xl p-6 bg-purple-500/10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[350px]' >
+                        className='rounded-2xl overflow-hidden shadow-2xl p-6 bg-purple-500/10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[500px]' >
 
                         <div className="md:order-1 order-2 p-4">
                             <h2 className="text-2xl lg:text-3xl font-bold  mb-3 leading-tight">Join 10,000+ Members Preserving Their Wisdom</h2>
@@ -94,7 +87,7 @@ const Banner = () => {
 
                         <div className="md:order-2 order-1 flex justify-center items-center">
                             <img
-                                src={join}
+                                src={banner3}
                                 alt='Secure Trade'
                                 className="w-full h-80 object-cover rounded-xl shadow-2xl transform transition duration-500 "
                             />

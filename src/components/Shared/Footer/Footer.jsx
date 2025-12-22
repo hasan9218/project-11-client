@@ -1,13 +1,14 @@
 import React from 'react';
-import logo from '../../../assets/WisdomVault.png'
-
+import logo from '../../../assets/logo.png'
+import { Link } from 'react-router';
 const Footer = () => {
     return (
         <footer className="footer sm:footer-horizontal bg-base-300 text-base-content p-10">
-            <nav>
-                <img src={logo} alt="" className='w-20' />
-                <h2 className='text-secondary font-bold text-2xl'>Wisdom<span className='text-primary'>Vault</span></h2>
-            </nav>
+            
+            <Link to={'/'} className='gap-2 items-center italic'>
+                <img src={logo} alt="" className='w-15' />
+                <span className={'text-primary font-bold text-2xl'}>Wisdom<span className='text-green-700'>Cell</span> </span>
+            </Link>
             <nav>
                 <h6 className="footer-title">Legal</h6>
                 <a className="link link-hover">Terms of use</a>

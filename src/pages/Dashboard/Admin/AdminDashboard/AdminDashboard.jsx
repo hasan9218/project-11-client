@@ -1,4 +1,3 @@
-import React from 'react';
 import AdminBanner from './AdminBanner';
 import AdminStats from './AdminStats';
 import TodayLessonsTable from './TodayLessonsTable';

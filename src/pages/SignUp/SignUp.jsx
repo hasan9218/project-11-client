@@ -78,7 +78,7 @@ const SignUp = () => {
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
         <div className='mb-8 text-center'>
           <h1 className='my-3 text-4xl font-bold'>Sign Up</h1>
-          <p className='text-sm text-gray-400'>Welcome to WisdomVault</p>
+          <p className='text-sm text-gray-400'>Welcome to WisdomCell</p>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -185,12 +185,12 @@ const SignUp = () => {
           <div>
             <button
               type='submit'
-              className='bg-secondary w-full rounded-md py-3 text-white'
+              className='bg-secondary w-full cursor-pointer rounded-md py-3 text-white'
             >
               {loading ? (
                 <TbFidgetSpinner className='animate-spin m-auto' />
               ) : (
-                'Continue'
+                'Register'
               )}
             </button>
           </div>
@@ -214,7 +214,7 @@ const SignUp = () => {
           Already have an account?{' '}
           <Link
             to='/login'
-            className='hover:underline hover:text-secondary text-gray-600'
+            className='hover:underline hover:text-secondary text-lg text-secondary'
           >
             Login
           </Link>

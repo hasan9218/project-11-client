@@ -10,6 +10,7 @@ const UpdateLesson = ({ lesson ,refetch}) => {
     const handleUpdate = (id) => {
         setIsOpen(true)
         console.log("Update lesson:", id);
+        
     };
     return (
         <>

@@ -112,7 +112,7 @@ const AddLessonForm = () => {
                 ></textarea>
 
                 {/* Category */}
-                <select
+                {/* <select
                     {...register("category", { required: true })}
                     className="select select-bordered w-full"
                 >
@@ -122,10 +122,20 @@ const AddLessonForm = () => {
                     {categories.map((cat) => (
                         <option key={cat}>{cat}</option>
                     ))}
+                </select> */}
+                <select
+                    {...register("category", { required: true })}
+                    defaultValue=""
+                    className="select select-bordered w-full"
+                >
+                    <option disabled value="">Select Category</option>
+                    {categories.map((cat) => (
+                        <option key={cat} value={cat}>{cat}</option>
+                    ))}
                 </select>
 
                 {/* Emotional Tone */}
-                <select
+                {/* <select
                     {...register("emotionalTone", { required: true })}
                     className="select select-bordered w-full"
                 >
@@ -134,6 +144,16 @@ const AddLessonForm = () => {
                     </option>
                     {emotionalTones.map((tone) => (
                         <option key={tone}>{tone}</option>
+                    ))}
+                </select> */}
+                <select
+                    {...register("emotionalTone", { required: true })}
+                    defaultValue=""
+                    className="select select-bordered w-full"
+                >
+                    <option disabled value="">Select Emotional Tone</option>
+                    {emotionalTones.map((tone) => (
+                        <option key={tone} value={tone}>{tone}</option>
                     ))}
                 </select>
 
@@ -177,7 +197,8 @@ const AddLessonForm = () => {
                     {loading ? "Posting..." : "Submit Lesson"}
                 </button>
             </form>
-             {/* Success Modal */}
+
+            {/* Success Modal */}
             {showSuccess && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     <div

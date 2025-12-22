@@ -3,7 +3,6 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'rec
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAuth from '../../../../hooks/useAuth';
 
-
 const DashboardAnalytics = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -34,6 +33,7 @@ const DashboardAnalytics = () => {
 
     return acc;
   }, []);
+
   return (
     <div className="bg-white shadow rounded-xl p-6">
       <h3 className="text-lg font-bold mb-4">Your Contribution Trend</h3>

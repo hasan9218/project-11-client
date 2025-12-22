@@ -8,32 +8,32 @@ const WhyLerningFromLifeLesson = () => {
       icon: <FaBrain />,
       title: "Builds Emotional Intelligence",
       description: "Reflecting on experiences increases self-awareness and empathy.",
-      color: "text-[#F69074]",
-      border: "border-l-4 border-[#F69074]"
+      color: "text-primary",
+      border: "border-l-4 border-primary"
     },
     {
       id: 2,
       icon: <FaHeart />,
       title: "Accelerates Personal Growth",
       description: "Document insights to avoid repeating mistakes.",
-      color: "text-[#02a2a2]",
-      border: "border-l-4 border-[#02a2a2]"
+      color: "text-secondary",
+      border: "border-l-4 border-secondary"
     },
     {
       id: 3,
       icon: <FaUsers />,
       title: "Creates Meaningful Connections",
       description: "Share lessons to build authentic communities.",
-      color: "text-[#02a2a2]",
-      border: "border-l-4 border-[#02a2a2]"
+      color: "text-secondary",
+      border: "border-l-4 border-secondary"
     },
     {
       id: 4,
       icon: <FaChartLine />,
       title: "Enhances Decision Making",
       description: "Use documented wisdom for better future choices.",
-      color: "text-[#F69074]",
-      border: "border-l-4 border-[#F69074]"
+      color: "text-primary",
+      border: "border-l-4 border-primary"
     }
   ];
 

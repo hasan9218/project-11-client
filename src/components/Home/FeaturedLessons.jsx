@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query'
-import { FaStar, FaEye } from 'react-icons/fa';
+import { FcRating } from "react-icons/fc";
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import LessonCard from './Lessons/LessonCard';
 import { Autoplay, EffectCoverflow } from 'swiper/modules';
@@ -62,22 +62,17 @@ const FeaturedLessons = () => {
                             modules={[EffectCoverflow, Autoplay]}
                             className="mySwiper"
                         >
-
-                        {/* my opinion */}
                             {
-                                Array.isArray(featuredLessons) &&
-                                featuredLessons.map((lesson) => (
-                                    <SwiperSlide key={lesson._id}>
-                                        <LessonCard lesson={lesson} />
-                                    </SwiperSlide>
-                                ))
+                                featuredLessons.map((lesson) => <SwiperSlide key={lesson._id}>
+                                    <LessonCard lesson={lesson} />
+                                </SwiperSlide>)
                             }
 
                         </Swiper>
                     </>
                 ) : (
                     <div className="text-center py-16 bg-gray-50 rounded-2xl border border-dashed border-gray-300">
-                        <FaStar className="text-5xl text-gray-300 mx-auto mb-4" />
+                        <FcRating className="text-5xl text-gray-300 mx-auto mb-4" />
                         <h3 className="text-xl font-semibold text-gray-700 mb-2">
                             No Featured Lessons Yet
                         </h3>
