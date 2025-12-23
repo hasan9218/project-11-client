@@ -1,9 +1,9 @@
-WisdomCell(Digital life lesson):
+WisdomCell (Digital life lesson)
 
 WisdomCell is a lesson-sharing and reflection platform where users can create, explore, and save meaningful lessons focused on personal growth, mindset, career, and emotional well-being. The platform supports both free and premium content with role-based access for users and admins.
 
 🌐 Live Site
-Client URL: https://wisdomcell-auth.web.app
+Client-Side URL: https://wisdomcell-auth.web.app
 
 Server-Side URL: https://wisdom-cell-server.vercel.app
 
@@ -18,18 +18,30 @@ Key Features
 
 5.Dynamic dashboards for both users and admins, including statistics, recent activity, and growth charts.
 
-Technologies Used
-1.React.js
+🧩 Tech Stack
 
-2.Tailwind CSS & DaisyUI
+✅ FRONTEND:
 
-3.Node.js & Express.js
+■ React.js
 
-4.MongoDB
+■ React Router
 
-5.Firebase Authentication
+■ DaisyUI
 
-6.TanStack Query
+■ Tailwind CSS
 
-7.Recharts
+■ Firebase Authentication
 
+■ Axios
+
+✅ BACKEND:
+
+■ Node.js
+
+■ Express.js
+
+■ MongoDB
+
+■ TanStack Query
+
+■ Recharts.
