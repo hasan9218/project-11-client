@@ -1,6 +1,6 @@
-WisdomCell
-WisdomCell is a lesson-sharing and reflection platform where users can create, explore, and save meaningful lessons focused on personal growth, mindset, career, and emotional well-being. The platform supports both free and premium content with role-based access for users and admins.
+WisdomCell(Digital life lesson):
 
+WisdomCell is a lesson-sharing and reflection platform where users can create, explore, and save meaningful lessons focused on personal growth, mindset, career, and emotional well-being. The platform supports both free and premium content with role-based access for users and admins.
 
 🌐 Live Site
 Client URL: https://wisdomcell-auth.web.app
