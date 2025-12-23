@@ -8,6 +8,7 @@ Client-Side URL: https://wisdomcell-auth.web.app
 Server-Side URL: https://wisdom-cell-server.vercel.app
 
 Key Features
+
 1.Users can create, edit, and manage their own lessons with privacy and access control (public/private, free/premium).
 
 2.Advanced lesson browsing with category, emotional tone, search, sorting, and pagination support.
